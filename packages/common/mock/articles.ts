@@ -7,8 +7,9 @@ const articles:ArticleType[] = new Array(23).fill(null).map((_, idx) => {
   const body = faker.word.words({ count: { min: 3, max: 50 } });
   const thumbnail = faker.image.urlPicsumPhotos() as unknown as URL;
   const publishedAt = faker.date.between({ from: '2023-01-01T00:00:00.000Z', to: '2024-09-26T00:00:00.000Z' });
+  const user = faker.person.firstName();
   return {
-    id, body, publishedAt, thumbnail, title,
+    id, body, publishedAt, thumbnail, title, user,
   };
 });
 

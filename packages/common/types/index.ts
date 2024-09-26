@@ -4,4 +4,5 @@ export interface ArticleType {
   body: string;
   thumbnail: URL;
   publishedAt: Date;
+  user: string;
 }

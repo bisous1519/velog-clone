@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         white: 'var(--customWhite)',
         black: 'var(--customBlack)',
+        primary: 'var(--customPrimary)',
       },
     },
   },

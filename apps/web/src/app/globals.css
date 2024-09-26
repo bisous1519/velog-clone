@@ -5,6 +5,7 @@
 :root {
   --customWhite: #F8F9FA;
   --customBlack: #212529;
+  --customPrimary: #14B885;
 }
 
 /*@media (prefers-color-scheme: dark) {*/

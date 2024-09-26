@@ -2,7 +2,7 @@ import { ArticleType } from '@repo/common/type';
 import Image from 'next/image';
 import { LuDot } from 'react-icons/lu';
 import { IoIosHeart } from 'react-icons/io';
-import { faker } from '@faker-js/faker';
+import Link from 'next/link';
 
 type CardPropsType = {
   article: ArticleType,
@@ -10,7 +10,11 @@ type CardPropsType = {
 
 export default function Card({ article }: CardPropsType) {
   return (
-    <li className="w-80 bg-[#ffffff] transition-all duration-500 hover:shadow-lg hover:shadow-gray-300 hover:-translate-y-2">
+    <Link
+      href={`/article/${article.id}`}
+      passHref
+      className="w-80 bg-[#ffffff] transition-all duration-500 cursor-pointer hover:shadow-lg hover:shadow-gray-300 hover:-translate-y-2"
+    >
       <section className="h-40 overflow-hidden">
         <Image src={String(article.thumbnail)} alt="thumbnail" width={0} height={0} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       </section>
@@ -29,13 +33,13 @@ export default function Card({ article }: CardPropsType) {
             <Image src={String(article.thumbnail)} alt="profileImage" width={0} height={0} style={{ width: '2rem', height: '2rem', objectFit: 'cover' }} />
           </li>
           <li className="text-gray-400 text-[0.8rem]">by</li>
-          <li className="text-[0.9rem] font-semibold">{faker.person.firstName()}</li>
+          <li className="text-[0.9rem] font-semibold">{article.user}</li>
         </ul>
         <div className="flex items-center gap-1">
           <i className="text-sm"><IoIosHeart /></i>
           <span className="text-[0.8rem] text-gray-600">25</span>
         </div>
       </section>
-    </li>
+    </Link>
   );
 }
