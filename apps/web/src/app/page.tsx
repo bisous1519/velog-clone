@@ -1,8 +1,11 @@
 import { AiOutlineBell, AiOutlineSearch } from 'react-icons/ai';
 import Button from '@repo/common/components/Button';
 import { testCode } from '@repo/common';
+import { getArticle, getArticles } from '@repo/common/mock';
+import { useState } from 'react';
 
 export default function ListPage() {
+  console.log(getArticles());
   testCode();
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
