@@ -4,6 +4,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./mock": "./mock/index.ts",
+    "./type": "./types/index.ts",
     "./components/*": "./src/components/*.tsx"
   },
   "dependencies": {
