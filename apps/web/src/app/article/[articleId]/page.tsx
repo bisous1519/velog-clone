@@ -1,14 +1,15 @@
 import { ArticleType } from '@repo/common/type';
-import { getArticle } from '@repo/common/mock';
 import { LuDot } from 'react-icons/lu';
 import Image from 'next/image';
 
 type PropsType = {
-  params:{ articleId: string }
+  // params:{ articleId: string },
+  searchParams: { post: string },
 };
 
-export default function DetailPage({ params: { articleId } }: PropsType) {
-  const article:ArticleType = getArticle(parseInt(articleId));
+export default function DetailPage({ searchParams }: PropsType) {
+  const article:ArticleType = JSON.parse(searchParams.post);
+  // console.log('detailpage searchParams', searchParams.post);
   return (
     <section className="mt-20 ml-auto mr-auto w-4/5">
       <h1 className="text-[3.3rem]">{article.title}</h1>

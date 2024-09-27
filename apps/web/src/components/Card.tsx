@@ -9,9 +9,11 @@ type CardPropsType = {
 };
 
 export default function Card({ article }: CardPropsType) {
+  const data = JSON.stringify(article);
   return (
     <Link
-      href={`/article/${article.id}`}
+      href={`/article/${article.id}?post=${data}`}
+      // as={`/article/${article.id}`}
       passHref
       className="w-80 bg-[#ffffff] transition-all duration-500 cursor-pointer hover:shadow-lg hover:shadow-gray-300 hover:-translate-y-2"
     >
