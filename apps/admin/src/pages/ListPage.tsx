@@ -1,6 +1,7 @@
 import { Box, styled } from '@mui/material';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { getArticles } from '@repo/common/mock';
+import { useContentful } from '../hooks/useContentful.ts';
 
 const ListPageContainer = styled(Box)`
     //border: 1px solid black;
@@ -58,6 +59,8 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
 const rows = getArticles();
 
 export default function ListPage() {
+  const { deliveryAPI, previewAPI } = useContentful();
+
   return (
     <ListPageContainer>
       <DataGrid
