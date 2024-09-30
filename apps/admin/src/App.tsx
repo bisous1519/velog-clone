@@ -1,17 +1,21 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material';
 import Layout from './pages/Layout.tsx';
 import ListPage from './pages/ListPage.tsx';
 import DetailPage from './pages/DetailPage.tsx';
 
-const theme : Partial<DefaultTheme> = {
-
-};
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#14B885',
+    },
+  },
+});
 
 function App() {
   return (
-    <ThemeProvider theme={}>
+    <ThemeProvider theme={theme}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<ListPage />} />

@@ -1,13 +1,27 @@
 import { Outlet } from 'react-router-dom';
-import { styled } from '@mui/material';
+import { styled, Box } from '@mui/material';
+import Header from '../components/Header.tsx';
 
-// const LayoutContainer = styled(Box)
+// const LayoutContainer = styled(Box)(
+//   ({ theme }) => `
+//         width: 100vw;
+//         min-height: 100vh;
+//         padding: 2rem 8rem;
+//         color: ${theme.palette.primary.main};
+//     `,
+// );
+const LayoutContainer = styled(Box)`
+    //width: 100%;
+    min-height: 100vh;
+    padding: 2rem 8rem;
+`;
 
 export default function Layout() {
   return (
-    <div>
+    <LayoutContainer>
+      <Header />
       <Outlet />
-    </div>
+    </LayoutContainer>
   );
 }
 
