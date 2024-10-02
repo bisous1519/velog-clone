@@ -1,9 +1,14 @@
 import {
   Box, styled, Tab, Tabs,
 } from '@mui/material';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { ReactNode, useEffect, useState } from 'react';
+import {
+  DataGrid, GridColDef, GridRowParams,
+} from '@mui/x-data-grid';
+import {
+  ReactNode, SyntheticEvent, useEffect, useState,
+} from 'react';
 import { NoticeType } from '@repo/common/type';
+import { useNavigate } from 'react-router-dom';
 import { getAllEntries, getPublishedEntries } from '../utils/contentfulUtils.ts';
 
 const ListPageContainer = styled(Box)`
@@ -35,6 +40,7 @@ function TabPanel(props: TabPanelPropsType) {
 }
 
 export default function ListPage() {
+  const navigation = useNavigate();
   const [allEntries, setAllEntries] = useState<NoticeType[]>([]);
   const [publishedEntries, setPublishedEntries] = useState<NoticeType[]>([]);
   const [currentTab, setCurrentTab] = useState<number>(0);
@@ -86,8 +92,12 @@ export default function ListPage() {
     'aria-controls': `status-tabpanel-${index}`,
   });
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (event: SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue);
+  };
+
+  const handleRowClick = (params: GridRowParams) => {
+    navigation(`/article/${params.row.entryId}`);
   };
 
   useEffect(() => {
@@ -95,6 +105,7 @@ export default function ListPage() {
       const data:NoticeType[] = items.map((item, index) => ({
         ...item.fields,
         id: index,
+        entryId: item.sys.id,
         createdAt: new Date(item.sys.createdAt).toLocaleString(),
         updatedAt: new Date(item.sys.updatedAt).toLocaleString(),
       }));
@@ -104,6 +115,7 @@ export default function ListPage() {
       const data:NoticeType[] = items.map((item, index) => ({
         ...item.fields,
         id: index,
+        entryId: item.sys.id,
         createdAt: new Date(item.sys.createdAt).toLocaleString(),
         updatedAt: new Date(item.sys.updatedAt).toLocaleString(),
       }));
@@ -114,13 +126,14 @@ export default function ListPage() {
   return (
     <ListPageContainer>
       <Tabs value={currentTab} onChange={handleTabChange} aria-label="status tabs">
-        <Tab label="All" {...a11yProps(0)} sx={{ fontSize: '1.4rem' }} />
-        <Tab label="Published" {...a11yProps(1)} sx={{ fontSize: '1.4rem' }} />
+        <Tab label="Published" {...a11yProps(0)} sx={{ fontSize: '1.4rem' }} />
+        <Tab label="All" {...a11yProps(1)} sx={{ fontSize: '1.4rem' }} />
       </Tabs>
       <TabPanel value={currentTab} index={0}>
         <DataGrid
           columns={columns}
-          rows={allEntries}
+          rows={publishedEntries}
+          onRowClick={handleRowClick}
           initialState={{
             pagination: {
               paginationModel: {
@@ -134,11 +147,12 @@ export default function ListPage() {
       <TabPanel value={currentTab} index={1}>
         <DataGrid
           columns={columns}
-          rows={publishedEntries}
+          rows={allEntries}
+          onRowClick={handleRowClick}
           initialState={{
             pagination: {
               paginationModel: {
-                pageSize: 10,
+                pageSize: 25,
               },
             },
           }}

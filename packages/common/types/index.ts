@@ -13,6 +13,7 @@ export interface NoticeType {
   id?: number;
   title: string;
   content: string;
+  entryId: string;
   createdAt?: Date | string | `${number}-${number}-${number}T${number}:${number}:${number}Z`;
   updatedAt?: Date | string | `${number}-${number}-${number}T${number}:${number}:${number}Z`;
 }
